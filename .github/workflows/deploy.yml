@@ -25,7 +25,7 @@ jobs:
     - name: Build with Maven
       run: mvn clean package -DskipTests
 
-      -name: Build Docker image
+    - name: Build Docker image
       run: docker build -t ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}:latest .
 
     - name: Log in to Docker Hub
@@ -44,8 +44,8 @@ jobs:
               username: ${{ secrets.SERVER_USERNAME }}
               key: ${{ secrets.SERVER_SSH_KEY }}
               script: |
-              docker pull ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}:latest
-              docker stop spring-boot-app || true
-              docker rm spring-boot-app || true
-              docker run -d --name spring-boot-app -p 8081:8081 ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}:latest 
-              docker image prune -f
+                docker pull ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}:latest
+                docker stop spring-boot-app || true
+                docker rm spring-boot-app || true
+                docker run -d --name spring-boot-app -p 8081:8081 ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}:latest 
+                docker image prune -f
