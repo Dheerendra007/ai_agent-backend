@@ -1,5 +1,5 @@
 package com.substring.agent.backend.ai_agent_backend.controller;
 
-public class ProductListController {
+public class ProductDetailsController {
 
 }
