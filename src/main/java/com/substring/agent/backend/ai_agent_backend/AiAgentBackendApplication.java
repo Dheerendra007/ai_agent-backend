@@ -8,6 +8,7 @@ public class AiAgentBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AiAgentBackendApplication.class, args);
+		System.out.println("AI Agent Backend Application started successfully.");
 	}
 
 }
