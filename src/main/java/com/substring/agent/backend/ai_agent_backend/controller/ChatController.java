@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/")
 public class ChatController {
 
-    @Autowired 
+     
     private ChatClient chatClient;
-
+    
+    public ChatController(ChatClient.Builder builder) {
+        this.chatClient = builder.build();
+    }
     
     @GetMapping("chat")
     public ResponseEntity<String> chat(@RequestParam (value = "q", required = true) 
     String q) {
         // Here you can implement the logic to handle the chat message and generate a response.
         // For demonstration purposes, we'll just echo back the received message.
-        
-        return ResponseEntity.ok("This is working fine. You sent: " + q);
+        var response = chatClient.prompt(q).call().content();
+        return ResponseEntity.ok(response);
     }
     
 }
